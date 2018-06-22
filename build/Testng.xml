@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name='Starquik Oddo Sale Order Flow' verbose='10'>
+
+	<!-- Starquik odoo sale order flow test suit file -->
+	<suite-files>
+
+		<!-- Login Test suite file -->
+		<suite-file path=".//src/test/resources/LoginTest.xml"></suite-file>
+
+	</suite-files>
+</suite>
