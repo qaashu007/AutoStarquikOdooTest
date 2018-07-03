@@ -8,7 +8,14 @@ public class QuotationPageObject {
 	public static String customerNameText_xpath="//*[@id='o_field_input_6']";
 	public static String deliveryDatefield_xpath= "//input[@name='delivery_slot_date']";
 	public static String addItem_LinkText= "Add an item";
-	public static String itemInput_Xpath= "//input[@class='o_form_input ui-autocomplete-input']";
+	public static String itemInput_Xpath= "/html/body/div[1]/div/div[2]/div/div/div[1]/div/div[5]/div/div[1]/div[1]/div[2]/div[1]/div[1]/div/input";
 	public static String otherInfoTab_Xpath = "//a[contains(text(), 'Other Information')]";
+	public static String okButtonDialogue_Css= ".modal-footer > button:nth-child(1)";
+	public static String saleOrderWeight_Xpath = "//label[contains(text(), 'Sale Order Weight')]";
+	public static String warehouseTextfield_Xpath= "//*[@id=\"o_field_input_60\"]";
+	public static String activateDeliveryCheckbox_Id = "o_field_input_69";
+	public static String customerRefnoTextField_Id = "o_field_input_66";
+	public static String deliverySlot_Id = "o_field_input_18";
+	public static String SaveButton_Xpath = "//button[contains(text(), 'Save')]";
 
 }

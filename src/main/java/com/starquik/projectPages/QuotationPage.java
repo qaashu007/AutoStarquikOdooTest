@@ -13,6 +13,7 @@ public class QuotationPage extends BaseClass{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
+	String randomNumber = AutogenerateNumber(8);
 
 	public boolean isQuotationPageOpen() {
 		waitForElementDisplayed(By.xpath(QuotationPageObject.QuotationPageText_Xpath));
@@ -58,14 +59,47 @@ public class QuotationPage extends BaseClass{
 	public void enterItemName(String _item) {
 		waitForElementDisplayed(By.xpath(QuotationPageObject.itemInput_Xpath));
 		sendKeys(By.xpath(QuotationPageObject.itemInput_Xpath), _item);
-		log("Enter the [Item]", ILogLevel.METHOD);
-	}
-	
-	public void clickOtherInfoTab() {
+		log("Enter the [Item] name", ILogLevel.METHOD);
 		pause(2);
+		click(By.xpath(QuotationPageObject.saleOrderWeight_Xpath));
+		log("Click outside to add item",ILogLevel.METHOD);	
+	}
+	public void clickQuantityConfirmDialogue() {
+		waitForElementDisplayed(By.cssSelector(QuotationPageObject.okButtonDialogue_Css));
+		click(By.cssSelector(QuotationPageObject.okButtonDialogue_Css));
+		log("Accept confirm dialogue", ILogLevel.METHOD);
+	}
+	public void clickOtherInfoTab() {
 		waitForElementDisplayed(By.xpath(QuotationPageObject.otherInfoTab_Xpath));
 		click(By.xpath(QuotationPageObject.otherInfoTab_Xpath));
 		log("click on [Other Information] tab", ILogLevel.METHOD);
+	}
+	public void enterWarehouse(String _warehouse) {
+		waitForElementDisplayed(By.xpath(QuotationPageObject.warehouseTextfield_Xpath));
+		driver.findElement(By.xpath(QuotationPageObject.warehouseTextfield_Xpath)).clear();
+		sendKeys(By.xpath(QuotationPageObject.warehouseTextfield_Xpath), _warehouse);
+		log("enter the [Warehouse]", ILogLevel.METHOD);
+		pause(2);
+	}
+	public void clickActivateDeliveryCheckbox() {
+		waitForElementDisplayed(By.id(QuotationPageObject.activateDeliveryCheckbox_Id));
+		click(By.id(QuotationPageObject.activateDeliveryCheckbox_Id));
+		log("Click on [Activate Delivery] checkbox", ILogLevel.METHOD);
+	}
+	public void enterCustomerReferenceNumber() {
+		waitForElementDisplayed(By.id(QuotationPageObject.customerRefnoTextField_Id));
+		sendKeys(By.id(QuotationPageObject.customerRefnoTextField_Id), randomNumber);
+		log("enter the [Customer Reference No.]", ILogLevel.METHOD);
+	}
+	public void selectDeliverySlot(String _slot) {
+		waitForElementDisplayed(By.id(QuotationPageObject.deliverySlot_Id));
+		sendKeys(By.id(QuotationPageObject.deliverySlot_Id), _slot);
+		log("Select [Delivery Slot]", ILogLevel.METHOD);
+	}
+	public void clickSaveButton() {
+		waitForElementDisplayed(By.id(QuotationPageObject.SaveButton_Xpath));
+		click(By.id(QuotationPageObject.SaveButton_Xpath));
+		log("Click on [Save] button", ILogLevel.METHOD);
 	}
 
 

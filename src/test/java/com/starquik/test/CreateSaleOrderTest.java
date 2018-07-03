@@ -38,7 +38,13 @@ public class CreateSaleOrderTest extends TestCore{
 	    quotationPage.enterDeliveryDate();
 	    quotationPage.clickAddItemLink();
 	    quotationPage.enterItemName(config.getProperty("item_name"));
+	    quotationPage.clickQuantityConfirmDialogue();
 	    quotationPage.clickOtherInfoTab();
+	    quotationPage.enterWarehouse(config.getProperty("warehouse"));
+	    quotationPage.clickActivateDeliveryCheckbox();
+	    quotationPage.enterCustomerReferenceNumber();
+	    quotationPage.selectDeliverySlot(config.getProperty("delivery_slot"));
+	    quotationPage.clickSaveButton();
 	    
 		
 	}
