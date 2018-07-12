@@ -1,6 +1,7 @@
 package com.starquik.projectPages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import com.starquik.pageObject.QuotationPageObject;
@@ -24,6 +25,7 @@ public class QuotationPage extends BaseClass{
 	}
 
 	public void clickCreateButton() {
+		pause(8);
 		waitForElementDisplayed(By.xpath(QuotationPageObject.createButton_Xpath));
 		click(By.xpath(QuotationPageObject.createButton_Xpath));
 		log("Click on [Create] button", ILogLevel.METHOD);
@@ -74,10 +76,15 @@ public class QuotationPage extends BaseClass{
 		click(By.xpath(QuotationPageObject.otherInfoTab_Xpath));
 		log("click on [Other Information] tab", ILogLevel.METHOD);
 	}
+	public void scrollDown() {
+		pause(3);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(250,450)", "");
+	}
 	public void enterWarehouse(String _warehouse) {
-		waitForElementDisplayed(By.xpath(QuotationPageObject.warehouseTextfield_Xpath));
-		driver.findElement(By.xpath(QuotationPageObject.warehouseTextfield_Xpath)).clear();
-		sendKeys(By.xpath(QuotationPageObject.warehouseTextfield_Xpath), _warehouse);
+		waitForElementDisplayed(By.xpath("//input[@class='o_form_input.ui-autocomplete-input']"));
+		driver.findElement(By.className("//input[@class='o_form_input.ui-autocomplete-input']")).clear();
+		sendKeys(By.className("//input[@class='o_form_input.ui-autocomplete-input']"), _warehouse);
 		log("enter the [Warehouse]", ILogLevel.METHOD);
 		pause(2);
 	}

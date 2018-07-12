@@ -124,11 +124,10 @@ public class BaseClass {
 	}
 
 	public final boolean waitForElementDisplayed(By by) {
-		for(int sec=1; sec<=1; sec++){
+		for(int sec=1; sec<=2; sec++){
 			try{
 				if ( driver.findElement(by).isDisplayed() ) {
-
-					//captureScreenshot();
+					
 					return true;
 				}
 			}catch(Exception e){
@@ -138,7 +137,6 @@ public class BaseClass {
 				Thread.sleep(500);
 			}catch(Exception e){}
 		}
-		//  analyzeBrowserLogs();
 		return false;
 	}
 

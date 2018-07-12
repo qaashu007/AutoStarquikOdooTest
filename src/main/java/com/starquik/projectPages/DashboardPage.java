@@ -30,6 +30,7 @@ public class DashboardPage extends BaseClass{
 	}
 	
 	public void clickSalesIcon() {
+		pause(3);
 		waitForElementDisplayed(By.xpath(DashboardPageObject.salesIcon_Xpath));
 		click(By.xpath(DashboardPageObject.salesIcon_Xpath));
 		log("click on [Sales] icon", ILogLevel.METHOD);

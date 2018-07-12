@@ -40,6 +40,7 @@ public class CreateSaleOrderTest extends TestCore{
 	    quotationPage.enterItemName(config.getProperty("item_name"));
 	    quotationPage.clickQuantityConfirmDialogue();
 	    quotationPage.clickOtherInfoTab();
+	    quotationPage.scrollDown();
 	    quotationPage.enterWarehouse(config.getProperty("warehouse"));
 	    quotationPage.clickActivateDeliveryCheckbox();
 	    quotationPage.enterCustomerReferenceNumber();

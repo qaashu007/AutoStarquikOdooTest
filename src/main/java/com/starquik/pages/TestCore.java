@@ -143,7 +143,7 @@ public class TestCore extends Page{
 
 		driver.manage().window().maximize();
 		driver.get(config.getProperty("site_url"));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
 
 

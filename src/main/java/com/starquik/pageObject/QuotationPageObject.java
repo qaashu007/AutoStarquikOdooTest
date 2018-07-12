@@ -12,7 +12,7 @@ public class QuotationPageObject {
 	public static String otherInfoTab_Xpath = "//a[contains(text(), 'Other Information')]";
 	public static String okButtonDialogue_Css= ".modal-footer > button:nth-child(1)";
 	public static String saleOrderWeight_Xpath = "//label[contains(text(), 'Sale Order Weight')]";
-	public static String warehouseTextfield_Xpath= "//*[@id=\"o_field_input_60\"]";
+	public static String warehouseTextfield_Xpath= "#o_field_input_60";
 	public static String activateDeliveryCheckbox_Id = "o_field_input_69";
 	public static String customerRefnoTextField_Id = "o_field_input_66";
 	public static String deliverySlot_Id = "o_field_input_18";
