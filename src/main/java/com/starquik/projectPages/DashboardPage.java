@@ -1,5 +1,7 @@
 package com.starquik.projectPages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -30,9 +32,9 @@ public class DashboardPage extends BaseClass{
 	}
 	
 	public void clickSalesIcon() {
-		pause(3);
-		waitForElementDisplayed(By.xpath(DashboardPageObject.salesIcon_Xpath));
-		click(By.xpath(DashboardPageObject.salesIcon_Xpath));
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		//waitForElementDisplayed(By.className(DashboardPageObject.salesIcon_Class));
+		click(By.className(DashboardPageObject.salesIcon_Class));
 		log("click on [Sales] icon", ILogLevel.METHOD);
 	}
 	

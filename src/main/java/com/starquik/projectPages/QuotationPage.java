@@ -1,5 +1,7 @@
 package com.starquik.projectPages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,7 +42,9 @@ public class QuotationPage extends BaseClass{
 	}
 
 	public void enterCustomerName(String _customer) {
-		waitForElementDisplayed(By.xpath(QuotationPageObject.customerNameText_xpath));
+		pause(2);
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		//waitForElementDisplayed(By.xpath(QuotationPageObject.customerNameText_xpath));
 		sendKeys(By.xpath(QuotationPageObject.customerNameText_xpath), _customer);
         log("Enter the [Customer Name]", ILogLevel.METHOD);
 	}
