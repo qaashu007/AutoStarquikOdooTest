@@ -1,10 +1,12 @@
 package com.starquik.projectPages;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.starquik.pageObject.QuotationPageObject;
 import com.starquik.pages.BaseClass;
@@ -16,7 +18,6 @@ public class QuotationPage extends BaseClass{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	String randomNumber = AutogenerateNumber(8);
 
 	public boolean isQuotationPageOpen() {
 		waitForElementDisplayed(By.xpath(QuotationPageObject.QuotationPageText_Xpath));
@@ -46,21 +47,37 @@ public class QuotationPage extends BaseClass{
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 		//waitForElementDisplayed(By.xpath(QuotationPageObject.customerNameText_xpath));
 		sendKeys(By.xpath(QuotationPageObject.customerNameText_xpath), _customer);
-        log("Enter the [Customer Name]", ILogLevel.METHOD);
+		log("Enter the [Customer Name]", ILogLevel.METHOD);
 	}
-	
+
 	public void enterDeliveryDate() {
 		pause(3);
 		waitForElementDisplayed(By.xpath(QuotationPageObject.deliveryDatefield_xpath));
 		click(By.xpath(QuotationPageObject.deliveryDatefield_xpath));
 		log("Enter [Delivery Date]", ILogLevel.METHOD);
 	}
-	
+
 	public void clickAddItemLink() {
-		waitForElementDisplayed(By.linkText(QuotationPageObject.addItem_LinkText));
-		click(By.linkText(QuotationPageObject.addItem_LinkText));
-		log("Click on [Add an item] link", ILogLevel.METHOD);
-		pause(4);
+		pause(1);
+		Boolean addItemLinkPresent = isElementPresent(By.linkText(QuotationPageObject.addItem_LinkText));
+		
+		if(!addItemLinkPresent) {
+			waitForElementDisplayed(By.xpath(QuotationPageObject.orderLineTab_Xpath));
+			click(By.xpath(QuotationPageObject.orderLineTab_Xpath));
+			log("click on [Order Line] tab", ILogLevel.METHOD);
+
+			waitForElementDisplayed(By.linkText(QuotationPageObject.addItem_LinkText));
+			click(By.linkText(QuotationPageObject.addItem_LinkText));
+			log("Click on [Add an item] link", ILogLevel.METHOD);
+			pause(4);
+		}
+		else {
+			waitForElementDisplayed(By.linkText(QuotationPageObject.addItem_LinkText));
+			click(By.linkText(QuotationPageObject.addItem_LinkText));
+			log("Click on [Add an item] link", ILogLevel.METHOD);
+			pause(4);
+		}
+
 	}
 	public void enterItemName(String _item) {
 		waitForElementDisplayed(By.xpath(QuotationPageObject.itemInput_Xpath));
@@ -81,36 +98,57 @@ public class QuotationPage extends BaseClass{
 		log("click on [Other Information] tab", ILogLevel.METHOD);
 	}
 	public void scrollDown() {
-		pause(3);
+		pause(2);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(250,450)", "");
 	}
 	public void enterWarehouse(String _warehouse) {
-		waitForElementDisplayed(By.xpath("//input[@class='o_form_input.ui-autocomplete-input']"));
-		driver.findElement(By.className("//input[@class='o_form_input.ui-autocomplete-input']")).clear();
-		sendKeys(By.className("//input[@class='o_form_input.ui-autocomplete-input']"), _warehouse);
+		waitForElementDisplayed(By.xpath("//input[starts-with(@id,'o_field_input_64')]"));
+		click(By.xpath("//input[starts-with(@id,'o_field_input_64')]"));
+		pause(1);
+
+		driver.findElement(By.xpath("//input[starts-with(@id,'o_field_input_64')]")).clear();
+		sendKeys(By.xpath("//input[starts-with(@id,'o_field_input_64')]"), _warehouse);
 		log("enter the [Warehouse]", ILogLevel.METHOD);
-		pause(2);
+		pause(1);
 	}
 	public void clickActivateDeliveryCheckbox() {
-		waitForElementDisplayed(By.id(QuotationPageObject.activateDeliveryCheckbox_Id));
-		click(By.id(QuotationPageObject.activateDeliveryCheckbox_Id));
+		waitForElementDisplayed(By.name(QuotationPageObject.activateDeliveryCheckbox_Name));
+		click(By.name(QuotationPageObject.activateDeliveryCheckbox_Name));
 		log("Click on [Activate Delivery] checkbox", ILogLevel.METHOD);
 	}
-	public void enterCustomerReferenceNumber() {
-		waitForElementDisplayed(By.id(QuotationPageObject.customerRefnoTextField_Id));
-		sendKeys(By.id(QuotationPageObject.customerRefnoTextField_Id), randomNumber);
+	public void enterCustomerReferenceNumber(String _randomNumber) {
+		waitForElementDisplayed(By.xpath(QuotationPageObject.customerRefnoTextField_Xpath));
+		List<WebElement> elementsList = driver.findElements(By.xpath(QuotationPageObject.customerRefnoTextField_Xpath));
+		elementsList.get(1).sendKeys(_randomNumber);
 		log("enter the [Customer Reference No.]", ILogLevel.METHOD);
 	}
 	public void selectDeliverySlot(String _slot) {
 		waitForElementDisplayed(By.id(QuotationPageObject.deliverySlot_Id));
-		sendKeys(By.id(QuotationPageObject.deliverySlot_Id), _slot);
+		//sendKeys(By.id(QuotationPageObject.deliverySlot_Id), _slot);
+		click(By.id(QuotationPageObject.deliverySlot_Id));  //ui-menu-item   [D3] 12 PM-02 PM
+		click(By.linkText(""+_slot+""));
 		log("Select [Delivery Slot]", ILogLevel.METHOD);
 	}
 	public void clickSaveButton() {
-		waitForElementDisplayed(By.id(QuotationPageObject.SaveButton_Xpath));
-		click(By.id(QuotationPageObject.SaveButton_Xpath));
+		waitForElementDisplayed(By.cssSelector(QuotationPageObject.SaveButton_Css));
+		click(By.cssSelector(QuotationPageObject.SaveButton_Css));
 		log("Click on [Save] button", ILogLevel.METHOD);
+	}
+	public void clickQuotationLink() {
+		pause(3);
+		waitForElementDisplayed(By.linkText("Quotations"));
+		click(By.linkText("Quotations"));
+		log("click on [Quotations] link", ILogLevel.METHOD);
+	}
+	public boolean verifyCreatedOrder(String _randomNumber) {
+		waitForElementDisplayed(By.xpath("//td[@data-field='client_order_ref']"));
+		String actualOrderNumber= driver.findElement(By.xpath("//td[@data-field='client_order_ref']")).getText();
+		String expectedOrderNumber= _randomNumber;
+		if(actualOrderNumber.equals(expectedOrderNumber)) {
+			return true;
+		}return false;
+
 	}
 
 
