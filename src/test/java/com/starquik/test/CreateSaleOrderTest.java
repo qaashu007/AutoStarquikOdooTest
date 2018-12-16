@@ -33,25 +33,30 @@ public class CreateSaleOrderTest extends TestCore{
 		saleOrderPage.SelectSalesOption("Quotations");
 		Assert.assertTrue("Quotation page isn't open yet", quotationPage.isQuotationPageOpen());
 
-		
+
 		for(int i=1;i<=2;i++) {
-			log("=========Creating Sale Order ["+i+"]=========",ILogLevel.TEST);
-			
+			log("=========Creating Sale Order ["+i+"] for ["+config.getProperty("warehouse")+"]=========",ILogLevel.TEST);
+
 			quotationPage.clickCreateButton();
 			Assert.assertTrue("Create Sale Order page isn't open yet", quotationPage.isCreateSaleOrderPageOpen());
 
 			quotationPage.enterCustomerName(config.getProperty("cust_name"));
 			quotationPage.enterDeliveryDate();
-			quotationPage.clickAddItemLink();
-			quotationPage.enterItemName(config.getProperty("item_name"));
-			quotationPage.clickQuantityConfirmDialogue();
+			String items = config.getProperty("item_name");
+			String[] splitItems = items.split(", ");
+			for (int j=0; j < splitItems.length; j++)
+			{
+				quotationPage.clickAddItemLink();
+				quotationPage.enterItemName(splitItems[j]);
+				quotationPage.clickQuantityConfirmDialogue();
+			}
+			
 			quotationPage.clickOtherInfoTab();
-			quotationPage.scrollDown();
 			quotationPage.enterWarehouse(config.getProperty("warehouse"));
 			quotationPage.clickActivateDeliveryCheckbox();
-			
+
 			String randomNumber = RandomStringUtils.randomNumeric(8);
-			
+
 			quotationPage.enterCustomerReferenceNumber(randomNumber);
 			quotationPage.selectDeliverySlot(config.getProperty("delivery_slot"));
 			quotationPage.clickSaveButton();

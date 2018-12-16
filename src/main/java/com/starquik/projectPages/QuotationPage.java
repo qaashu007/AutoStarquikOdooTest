@@ -28,7 +28,6 @@ public class QuotationPage extends BaseClass{
 	}
 
 	public void clickCreateButton() {
-		pause(8);
 		waitForElementDisplayed(By.xpath(QuotationPageObject.createButton_Xpath));
 		click(By.xpath(QuotationPageObject.createButton_Xpath));
 		log("Click on [Create] button", ILogLevel.METHOD);
@@ -43,9 +42,8 @@ public class QuotationPage extends BaseClass{
 	}
 
 	public void enterCustomerName(String _customer) {
-		pause(2);
+		//pause(2);
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		//waitForElementDisplayed(By.xpath(QuotationPageObject.customerNameText_xpath));
 		sendKeys(By.xpath(QuotationPageObject.customerNameText_xpath), _customer);
 		log("Enter the [Customer Name]", ILogLevel.METHOD);
 	}
@@ -61,17 +59,15 @@ public class QuotationPage extends BaseClass{
 		pause(1);
 		Boolean addItemLinkPresent = isElementPresent(By.linkText(QuotationPageObject.addItem_LinkText));
 		
-		if(!addItemLinkPresent) {
-			waitForElementDisplayed(By.xpath(QuotationPageObject.orderLineTab_Xpath));
-			click(By.xpath(QuotationPageObject.orderLineTab_Xpath));
-			log("click on [Order Line] tab", ILogLevel.METHOD);
-
-			waitForElementDisplayed(By.linkText(QuotationPageObject.addItem_LinkText));
+		if(addItemLinkPresent) {
 			click(By.linkText(QuotationPageObject.addItem_LinkText));
 			log("Click on [Add an item] link", ILogLevel.METHOD);
 			pause(4);
 		}
 		else {
+			click(By.xpath(QuotationPageObject.orderLineTab_Xpath));
+			log("click on [Order Line] tab", ILogLevel.METHOD);
+			
 			waitForElementDisplayed(By.linkText(QuotationPageObject.addItem_LinkText));
 			click(By.linkText(QuotationPageObject.addItem_LinkText));
 			log("Click on [Add an item] link", ILogLevel.METHOD);
@@ -80,6 +76,7 @@ public class QuotationPage extends BaseClass{
 
 	}
 	public void enterItemName(String _item) {
+		pause(2);
 		waitForElementDisplayed(By.xpath(QuotationPageObject.itemInput_Xpath));
 		sendKeys(By.xpath(QuotationPageObject.itemInput_Xpath), _item);
 		log("Enter the [Item] name", ILogLevel.METHOD);
