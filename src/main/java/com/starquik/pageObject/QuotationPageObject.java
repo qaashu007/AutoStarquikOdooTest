@@ -13,9 +13,9 @@ public class QuotationPageObject {
 	public static String orderLineTab_Xpath = "//a[contains(text(), 'Order Lines')]";
 	public static String okButtonDialogue_Css= ".modal-footer > button:nth-child(1)";
 	public static String saleOrderWeight_Xpath = "//label[contains(text(), 'Sale Order Weight')]";
-	public static String warehouseTextfield_Xpath= "#o_field_input_60";
 	public static String activateDeliveryCheckbox_Name = "activate_delivery";
-	public static String customerRefnoTextField_Xpath = "//input[starts-with(@id,'o_field_input_71')]";
+	public static String customerRefnoTextField_Xpath = "(//input[@id='o_field_input_70'])[2]";
+	public static String warehouseDropdown_Xpath = "//input[starts-with(@id,'o_field_input_64')]";
 	public static String deliverySlot_Id = "o_field_input_21";
 	public static String SaveButton_Css = ".o_form_button_save";
 	

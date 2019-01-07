@@ -11,10 +11,9 @@ import com.starquik.projectPages.LoginPage;
 import com.starquik.projectPages.QuotationPage;
 import com.starquik.projectPages.SalesOrderPage;
 
-public class CreateSaleOrderTest extends TestCore{
-
-	@Test(priority = 0)
-	public void testCreateSaleOrder() {
+public class DuplicateOrdersTest extends TestCore{
+	@Test(priority=0)
+	public void testDuplicateOrdersTest() {
 		LoginPage loginPage = new LoginPage(driver);
 		DashboardPage dashbordPage = new DashboardPage(driver);
 		SalesOrderPage saleOrderPage = new SalesOrderPage(driver);
@@ -37,8 +36,7 @@ public class CreateSaleOrderTest extends TestCore{
 		String[] splitWarehouse = warehouse.split(", ");
 
 		for(int k=0; k < splitWarehouse.length; k++){
-		for(int i=1;i<=2;i++) {
-			log("=========Creating Sale Order ["+i+"] for ["+splitWarehouse[k]+"]=========",ILogLevel.TEST);
+			log("=========Creating Sale Order for ["+splitWarehouse[k]+"]=========",ILogLevel.TEST);
 
 			quotationPage.clickCreateButton();
 			Assert.assertTrue("Create Sale Order page isn't open yet", quotationPage.isCreateSaleOrderPageOpen());
@@ -65,9 +63,13 @@ public class CreateSaleOrderTest extends TestCore{
 			quotationPage.selectDeliverySlot(config.getProperty("delivery_slot"));
 			quotationPage.clickOrdeLineTab();
 			quotationPage.clickSaveButton();
-			quotationPage.clickQuotationLink();
-			Assert.assertTrue("Sale Order is not created successfully", quotationPage.verifyCreatedOrder(randomNumber));
-		}
+			for(int i=1; i<=50; i++) {
+				log("Create Duplicate order ["+i+"]", ILogLevel.TEST);
+				quotationPage.selectDuplicateOption();
+				quotationPage.clickSaveButton();
+			}
+			
+
 		}
 
 	}
